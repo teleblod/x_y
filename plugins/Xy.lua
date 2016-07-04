@@ -1,20 +1,20 @@
-local function add_user(chat, user)
-   local status = chat_add_user (chat, user, ok_cb, false)
-   if not status then
-   end
-end
-    local function run(msg, matches)
-           if matches[1] == 'chat_del_user' then
-                local user = 'chat#id'..msg.to.id 
-                local chat = 'chat#id'..msg.from.id
-                add_user("chat#id"..msg.to.id, "user#id"..msg.action.user.id)
-                --return "" -- You can put everything here for returing when someone is added !
+do
+local function run(msg, matches)
+local bot_id = id-bot -- 236825827
+local fbotmain = your-id -- 99628088
+
+    if matches[1] == 'left' and is_admin(msg) or msg.action.type == "chat_add_user" and msg.action.user.id == tonumber(bot_id) and not is_sudo(msg) then
+       chat_del_user("chat#id"..msg.to.id, 'user#id'..bot_id, ok_cb, false)
+    elseif msg.action.type == "chat_del_user" and msg.action.user.id == tonumber(fbotmain) then
+       chat_add_user("chat#id"..msg.to.id, 'user#id'..fbotmain, ok_cb, false)
     end
 end
-
+ 
 return {
-    patterns = {
-        "^!!tgservice (chat_del_user)$",
-        },
-    run = run
+  patterns = {
+    "^[!/]([Ll][Ee][Ff][Tt])$",
+    "^!!tgservice (.+)$",
+  },
+  run = run
 }
+end
